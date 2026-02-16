@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --color-wood: #8b6914;
+  --color-wood-dark: #5c4710;
+  --color-cream: #faf6f0;
+  --color-warm-gray: #6b5b4f;
+}
+
+body {
+  font-family: "DM Sans", system-ui, sans-serif;
+}
