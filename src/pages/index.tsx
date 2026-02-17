@@ -28,7 +28,8 @@ export default function Home() {
               />
             </div>
 
-            {/* Text – centrerad mellan logga och kontakt */}
+            {/* Text – centrerad mellan logga och kontakt, mer luft på mobil */}
+            <div className="h-6 md:hidden" />
             <section className="space-y-4">
               <h2 className="text-2xl md:text-3xl font-semibold text-[#5c4710]">
                 Vi ger fom åt <span className="text-[#e02020]">idéer</span>
@@ -58,19 +59,32 @@ export default function Home() {
               <h2 className="text-xl md:text-2xl font-semibold text-[#5c4710] mb-4">
                 Kontakt
               </h2>
-              <div className="flex justify-between">
-                <div>
-                  <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
-                    E-post
-                  </h3>
-                  <a
-                    href="mailto:hej@kivo.studio"
-                    className="text-[#4a4540] hover:text-[#8b6914] transition-colors"
-                  >
-                    hej@kivo.studio
-                  </a>
+              <div className="flex flex-col md:flex-row md:justify-between gap-4 md:gap-0">
+                <div className="flex justify-between md:block">
+                  <div>
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
+                      E-post
+                    </h3>
+                    <a
+                      href="mailto:hej@kivo.studio"
+                      className="text-[#4a4540] hover:text-[#8b6914] transition-colors"
+                    >
+                      hej@kivo.studio
+                    </a>
+                  </div>
+                  <div className="md:hidden">
+                    <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
+                      Telefon
+                    </h3>
+                    <a
+                      href="tel:+46708898899"
+                      className="text-[#4a4540] hover:text-[#8b6914] transition-colors"
+                    >
+                      070-889 88 99
+                    </a>
+                  </div>
                 </div>
-                <div>
+                <div className="hidden md:block">
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
                     Telefon
                   </h3>
