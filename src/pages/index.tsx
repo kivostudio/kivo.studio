@@ -20,7 +20,7 @@ export default function Home() {
           {/* Höger: innehåll */}
           <main className="md:w-1/2 px-6 md:pl-12 md:pr-[72px] md:py-6 flex flex-col justify-between h-full">
             {/* Logga – övre linje med bilden */}
-            <div className="flex justify-end">
+            <div className="flex justify-center md:justify-end">
               <img
                 src="/logo.svg"
                 alt="Logga"
@@ -32,7 +32,7 @@ export default function Home() {
             <div className="h-6 md:hidden" />
             <section className="space-y-4">
               <h2 className="text-2xl md:text-3xl font-semibold text-[#5c4710]">
-                Vi ger fom åt <span className="text-[#e02020]">idéer</span>
+                Vi ger form åt <span className="text-[#e02020]">idéer</span>
               </h2>
               <p className="text-base md:text-lg leading-relaxed text-[#4a4540]">
                 Vi förverkligar det som inte finns än. Från skiss eller koncept
@@ -55,7 +55,7 @@ export default function Home() {
             </section>
 
             {/* Kontaktinfo – undre linje med bilden */}
-            <section className="mb-6">
+            <section className="mb-6 mt-8 md:mt-0">
               <h2 className="text-xl md:text-2xl font-semibold text-[#5c4710] mb-4">
                 Kontakt
               </h2>
