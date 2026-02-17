@@ -71,9 +71,9 @@ export default function Home() {
         </div>
 
         {/* Höger: innehåll – scrollar vid behov */}
-        <main className="md:w-1/2 md:ml-auto px-6 md:pl-12 md:pr-[72px] md:py-6 flex flex-col md:justify-between md:min-h-screen">
+        <main className="md:w-1/2 md:ml-auto px-6 md:pl-12 md:pr-[72px] md:py-6 flex flex-col md:justify-between md:h-screen">
             {/* Logga – övre linje med bilden */}
-            <header className="flex justify-center md:justify-end">
+            <header className="flex justify-center md:justify-end shrink-0">
               <img
                 src="/logo.svg"
                 alt="Kivo Studio logotyp"
@@ -83,7 +83,7 @@ export default function Home() {
 
             {/* Text – centrerad mellan logga och kontakt, mer luft på mobil */}
             <div className="h-6 md:hidden" />
-            <article className="space-y-4">
+            <article className="space-y-4 md:overflow-y-auto md:min-h-0">
               <h1 className="text-2xl md:text-3xl font-semibold text-[#2d2a26]">
                 Vi ger form åt <span className="text-[#e02020]">idéer</span>
               </h1>
@@ -117,7 +117,7 @@ export default function Home() {
             </article>
 
             {/* Kontaktinfo – undre linje med bilden */}
-            <footer className="mb-6 mt-8">
+            <footer className="mb-6 mt-8 shrink-0">
               <h2 className="text-xl md:text-2xl font-semibold text-[#2d2a26] mb-4">
                 Kontakt
               </h2>
