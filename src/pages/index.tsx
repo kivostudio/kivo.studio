@@ -46,11 +46,20 @@ export default function Home() {
                 produktutvecklare och alla andra som behöver göra en idé
                 gripbar. Oavsett om du kommer med en färdig 3D-modell eller en
                 servettskiss – vi tar det därifrån, från 3D-modellering hela
-                vägen till färdig produkt.
+                vägen till färdig produkt. Genom 3D-print, CNC-fräsning och
+                andra metoder hittar vi alltid rätt teknik och rätt finish för
+                ditt projekt.
               </p>
               <p className="text-base md:text-lg leading-relaxed text-[#4a4540]">
-                Vi anpassar storlek, antal, teknik och komplexitet efter ditt
-                projekt – men aldrig kvaliteten. Den är alltid högsta möjliga.
+                Kivo Studio grundades av Ivo Kiusalaas med en enkel idé: att
+                göra högkvalitativ tillverkning tillgänglig för fler. Med en
+                teknisk bakgrund inom industrin och över 15 års erfarenhet av
+                material och processer vet vi hur man levererar resultat –
+                snabbt, till rätt kvalitet och utan onödiga mellanhänder som
+                driver upp kostnaden.
+              </p>
+              <p className="text-base md:text-lg leading-relaxed text-[#4a4540]">
+                Hör av dig så tar vi det därifrån.
               </p>
             </section>
 
