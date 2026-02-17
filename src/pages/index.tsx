@@ -3,7 +3,7 @@ export default function Home() {
   return (
     <>
       <Head>
-        <title>Min Verkstad</title>
+        <title>Kivo Studio – Vi ger form åt idéer</title>
       </Head>
 
       <div className="md:h-screen flex flex-col md:overflow-hidden">
