@@ -1,0 +1,27 @@
+# Kivo Studio
+
+> Kivo Studio erbjuder 3D-print, CNC-fräsning och prototypframtagning i Hägersten, Stockholm. Vi tar projekt från skiss eller koncept till färdig produkt med högsta möjliga finish.
+
+## Om oss
+
+Kivo Studio grundades av Ivo Kiusalaas med en enkel idé: att göra högkvalitativ tillverkning tillgänglig för fler. Med en teknisk bakgrund inom industrin och över 15 års erfarenhet av material och processer levererar vi resultat snabbt, till rätt kvalitet och utan onödiga mellanhänder.
+
+## Tjänster
+
+- 3D-print (FDM, SLA, SLS)
+- CNC-fräsning
+- 3D-modellering
+- Prototypframtagning
+- Modellbygge
+- Finishing och efterbearbetning
+
+## Kunder
+
+Vi jobbar med konstnärer, arkitekter, scenografer, produktutvecklare och alla andra som behöver göra en idé gripbar. Oavsett om du kommer med en färdig 3D-modell eller en servettskiss – vi tar det därifrån.
+
+## Kontakt
+
+- Webbplats: https://kivo.studio
+- E-post: hej@kivo.studio
+- Telefon: 070-889 88 99
+- Adress: Jakobsdalsvägen 15B, 126 53 Hägersten, Stockholm, Sverige
