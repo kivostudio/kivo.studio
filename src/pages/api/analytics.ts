@@ -1,8 +1,8 @@
 import type { NextApiRequest, NextApiResponse } from "next";
 
-const TOKEN = process.env.VERCEL_API_TOKEN;
-const PROJECT_ID = process.env.VERCEL_PROJECT_ID;
-const TEAM_ID = process.env.VERCEL_TEAM_ID;
+const TOKEN = process.env.ANALYTICS_TOKEN;
+const PROJECT_ID = process.env.ANALYTICS_PROJECT_ID;
+const TEAM_ID = process.env.ANALYTICS_TEAM_ID;
 
 async function fetchVercel(path: string, params: Record<string, string>) {
   const query = new URLSearchParams({
