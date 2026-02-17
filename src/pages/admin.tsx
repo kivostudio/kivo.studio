@@ -1,39 +1,16 @@
 import Head from "next/head";
 import { useState, useEffect, useCallback } from "react";
 
-interface AnalyticsData {
-  timeseries: { data: { key: string; total: number }[] } | null;
-  countries: { data: { key: string; total: number }[] } | null;
-  pages: { data: { key: string; total: number }[] } | null;
-  referrers: { data: { key: string; total: number }[] } | null;
+interface TimeseriesPoint {
+  key: string;
+  total: number;
+  devices: number;
 }
 
-const COUNTRY_NAMES: Record<string, string> = {
-  SE: "Sverige",
-  US: "USA",
-  GB: "Storbritannien",
-  DE: "Tyskland",
-  NO: "Norge",
-  DK: "Danmark",
-  FI: "Finland",
-  FR: "Frankrike",
-  NL: "Nederländerna",
-  ES: "Spanien",
-  IT: "Italien",
-  CA: "Kanada",
-  AU: "Australien",
-  JP: "Japan",
-  CN: "Kina",
-  IN: "Indien",
-  BR: "Brasilien",
-  PL: "Polen",
-  AT: "Österrike",
-  CH: "Schweiz",
-  BE: "Belgien",
-  IE: "Irland",
-  PT: "Portugal",
-  CZ: "Tjeckien",
-};
+interface AnalyticsData {
+  timeseries: { data: TimeseriesPoint[] } | null;
+  overview: { total: number; devices: number } | null;
+}
 
 const LINKS = [
   {
@@ -189,20 +166,36 @@ export default function Admin() {
             Trafik (senaste 30 dagarna)
           </h2>
           {analyticsLoading && (
-            <div className="bg-white rounded-xl p-8 shadow-sm mb-10 text-center text-[#8b8078]">
+            <div className="bg-white rounded-xl p-8 shadow-sm mb-6 text-center text-[#8b8078]">
               Laddar analytics...
             </div>
           )}
           {analyticsError && (
-            <div className="bg-white rounded-xl p-8 shadow-sm mb-10 text-center text-[#8b8078]">
-              Kunde inte ladda analytics. Kontrollera att VERCEL_API_TOKEN,
-              VERCEL_PROJECT_ID och VERCEL_TEAM_ID är konfigurerade i Vercel.
+            <div className="bg-white rounded-xl p-8 shadow-sm mb-6 text-center text-[#8b8078]">
+              Kunde inte ladda analytics. Kontrollera att VERCEL_API_TOKEN
+              och VERCEL_PROJECT_ID är konfigurerade i Vercel.
+            </div>
+          )}
+          {analytics && analytics.overview && (
+            <div className="grid grid-cols-2 gap-4 mb-6">
+              <div className="bg-white rounded-xl p-5 shadow-sm text-center">
+                <p className="text-3xl font-bold text-[#2d2a26]">
+                  {analytics.overview.total}
+                </p>
+                <p className="text-sm text-[#8b8078] mt-1">Sidvisningar</p>
+              </div>
+              <div className="bg-white rounded-xl p-5 shadow-sm text-center">
+                <p className="text-3xl font-bold text-[#2d2a26]">
+                  {analytics.overview.devices}
+                </p>
+                <p className="text-sm text-[#8b8078] mt-1">Unika besökare</p>
+              </div>
             </div>
           )}
           {analytics && analytics.timeseries?.data && (
-            <div className="bg-white rounded-xl p-5 shadow-sm mb-10">
+            <div className="bg-white rounded-xl p-5 shadow-sm mb-6">
               <div className="flex items-end gap-[2px] h-40">
-                {analytics.timeseries.data.map((d) => {
+                {analytics.timeseries.data.map((d, i) => {
                   const max = Math.max(
                     ...analytics.timeseries!.data.map((x) => x.total),
                     1
@@ -212,101 +205,39 @@ export default function Admin() {
                     <div
                       key={d.key}
                       className="flex-1 group relative"
-                      title={`${d.key}: ${d.total} sidvisningar`}
                     >
                       <div
-                        className="bg-[#e02020] rounded-t-sm w-full transition-all hover:bg-[#c01818]"
+                        className="bg-[#e02020] rounded-t-sm w-full transition-all hover:bg-[#c01818] cursor-pointer"
                         style={{
                           height: `${Math.max(height, 2)}%`,
                         }}
                       />
-                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#2d2a26] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap">
-                        {d.key.slice(5)}: {d.total}
+                      <div className="absolute bottom-full mb-2 left-1/2 -translate-x-1/2 bg-[#2d2a26] text-white text-xs px-2 py-1 rounded opacity-0 group-hover:opacity-100 pointer-events-none whitespace-nowrap z-10">
+                        {d.key.slice(0, 10)}: {d.total} visningar, {d.devices} besökare
                       </div>
                     </div>
                   );
                 })}
               </div>
               <div className="flex justify-between mt-2 text-xs text-[#8b8078]">
+                <span>{analytics.timeseries.data[0]?.key.slice(0, 10)}</span>
                 <span>
-                  {analytics.timeseries.data[0]?.key.slice(5) || ""}
-                </span>
-                <span>
-                  Totalt:{" "}
-                  {analytics.timeseries.data.reduce(
-                    (sum, d) => sum + d.total,
-                    0
-                  )}{" "}
-                  sidvisningar
-                </span>
-                <span>
-                  {analytics.timeseries.data[
-                    analytics.timeseries.data.length - 1
-                  ]?.key.slice(5) || ""}
+                  {analytics.timeseries.data[analytics.timeseries.data.length - 1]?.key.slice(0, 10)}
                 </span>
               </div>
             </div>
           )}
-
-          {/* Länder och Referrers */}
-          {analytics && (
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 mb-10">
-              {analytics.countries?.data && analytics.countries.data.length > 0 && (
-                <div className="bg-white rounded-xl p-5 shadow-sm">
-                  <h3 className="font-medium text-[#2d2a26] mb-4">
-                    Besökare per land
-                  </h3>
-                  {analytics.countries.data.map((c) => {
-                    const max = analytics.countries!.data[0].total;
-                    const width = (c.total / max) * 100;
-                    return (
-                      <div key={c.key} className="mb-3">
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-[#4a4540]">
-                            {COUNTRY_NAMES[c.key] || c.key}
-                          </span>
-                          <span className="text-[#8b8078]">{c.total}</span>
-                        </div>
-                        <div className="h-2 bg-gray-100 rounded-full">
-                          <div
-                            className="h-2 bg-[#e02020] rounded-full"
-                            style={{ width: `${width}%` }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-              {analytics.referrers?.data && analytics.referrers.data.length > 0 && (
-                <div className="bg-white rounded-xl p-5 shadow-sm">
-                  <h3 className="font-medium text-[#2d2a26] mb-4">
-                    Trafikkällor
-                  </h3>
-                  {analytics.referrers.data.map((r) => {
-                    const max = analytics.referrers!.data[0].total;
-                    const width = (r.total / max) * 100;
-                    return (
-                      <div key={r.key} className="mb-3">
-                        <div className="flex justify-between text-sm mb-1">
-                          <span className="text-[#4a4540]">
-                            {r.key || "Direkt"}
-                          </span>
-                          <span className="text-[#8b8078]">{r.total}</span>
-                        </div>
-                        <div className="h-2 bg-gray-100 rounded-full">
-                          <div
-                            className="h-2 bg-[#8b6914] rounded-full"
-                            style={{ width: `${width}%` }}
-                          />
-                        </div>
-                      </div>
-                    );
-                  })}
-                </div>
-              )}
-            </div>
-          )}
+          <p className="text-xs text-[#8b8078] mb-10">
+            Detaljerad info om länder, enheter och trafikkällor finns i{" "}
+            <a
+              href="https://vercel.com/kivostudios-projects/kivo-studio/analytics"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-[#2d2a26]"
+            >
+              Vercel Analytics
+            </a>
+          </p>
 
           {/* Snabblänkar */}
           <h2 className="text-lg font-semibold text-[#2d2a26] mb-4">
