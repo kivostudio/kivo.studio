@@ -6,7 +6,7 @@ export default function Home() {
         <title>Min Verkstad</title>
       </Head>
 
-      <div className="h-screen flex flex-col overflow-hidden">
+      <div className="md:h-screen flex flex-col md:overflow-hidden">
         <div className="flex flex-col md:flex-row flex-1 min-h-0">
           {/* Vänster: verkstadsbild */}
           <div className="h-40 md:h-auto md:w-1/2 p-3 md:p-6 shrink-0">
