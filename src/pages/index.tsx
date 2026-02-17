@@ -31,7 +31,7 @@ export default function Home() {
             {/* Text – centrerad mellan logga och kontakt, mer luft på mobil */}
             <div className="h-6 md:hidden" />
             <section className="space-y-4">
-              <h2 className="text-2xl md:text-3xl font-semibold text-[#5c4710]">
+              <h2 className="text-2xl md:text-3xl font-semibold text-[#2d2a26]">
                 Vi ger form åt <span className="text-[#e02020]">idéer</span>
               </h2>
               <p className="text-base md:text-lg leading-relaxed text-[#4a4540]">
@@ -56,7 +56,7 @@ export default function Home() {
 
             {/* Kontaktinfo – undre linje med bilden */}
             <section className="mb-6 mt-8 md:mt-0">
-              <h2 className="text-xl md:text-2xl font-semibold text-[#5c4710] mb-4">
+              <h2 className="text-xl md:text-2xl font-semibold text-[#2d2a26] mb-4">
                 Kontakt
               </h2>
               <div className="flex flex-col md:flex-row md:justify-between gap-4 md:gap-0">
