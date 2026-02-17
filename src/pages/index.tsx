@@ -6,19 +6,27 @@ export default function Home() {
         <title>Kivo Studio – Vi ger form åt idéer</title>
       </Head>
 
-      <div className="md:h-screen flex flex-col md:overflow-hidden">
-        <div className="flex flex-col md:flex-row flex-1 min-h-0">
-          {/* Vänster: verkstadsbild */}
-          <div className="h-40 md:h-auto md:w-1/2 p-3 md:p-6 shrink-0">
-            <img
-              src="/verkstad.jpg"
-              alt="Jag står i min verkstad"
-              className="w-full h-full object-cover rounded-2xl"
-            />
-          </div>
+      <div>
+        {/* Mobil: cropppad bild överst */}
+        <div className="md:hidden h-40 p-3 shrink-0">
+          <img
+            src="/verkstad.jpg"
+            alt="Jag står i min verkstad"
+            className="w-full h-full object-cover rounded-2xl"
+          />
+        </div>
 
-          {/* Höger: innehåll */}
-          <main className="md:w-1/2 px-6 md:pl-12 md:pr-[72px] md:py-6 flex flex-col justify-between h-full">
+        {/* Desktop: fixerad bild till vänster */}
+        <div className="hidden md:block md:fixed md:left-0 md:top-0 md:w-1/2 md:h-screen p-6">
+          <img
+            src="/verkstad.jpg"
+            alt="Jag står i min verkstad"
+            className="w-full h-full object-cover rounded-2xl"
+          />
+        </div>
+
+        {/* Höger: innehåll – scrollar vid behov */}
+        <main className="md:w-1/2 md:ml-auto px-6 md:pl-12 md:pr-[72px] md:py-6 flex flex-col md:justify-between md:min-h-screen">
             {/* Logga – övre linje med bilden */}
             <div className="flex justify-center md:justify-end">
               <img
@@ -64,12 +72,12 @@ export default function Home() {
             </section>
 
             {/* Kontaktinfo – undre linje med bilden */}
-            <section className="mb-6 mt-8 md:mt-0">
+            <section className="mb-6 mt-8">
               <h2 className="text-xl md:text-2xl font-semibold text-[#2d2a26] mb-4">
                 Kontakt
               </h2>
-              <div className="flex flex-col md:flex-row md:justify-between gap-4 md:gap-0">
-                <div className="flex justify-between md:block">
+              <div className="flex flex-col lg:flex-row lg:justify-between gap-4 lg:gap-0">
+                <div className="flex justify-between lg:block">
                   <div>
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
                       E-post
@@ -81,7 +89,7 @@ export default function Home() {
                       hej@kivo.studio
                     </a>
                   </div>
-                  <div className="md:hidden">
+                  <div className="lg:hidden">
                     <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
                       Telefon
                     </h3>
@@ -93,7 +101,7 @@ export default function Home() {
                     </a>
                   </div>
                 </div>
-                <div className="hidden md:block">
+                <div className="hidden lg:block">
                   <h3 className="text-sm font-semibold uppercase tracking-wider text-[#8b6914] mb-1">
                     Telefon
                   </h3>
@@ -115,9 +123,7 @@ export default function Home() {
                 </div>
               </div>
             </section>
-          </main>
-        </div>
-
+        </main>
       </div>
     </>
   );
