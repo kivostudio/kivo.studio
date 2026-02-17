@@ -11,11 +11,15 @@ async function fetchVercel(path: string, params: Record<string, string>) {
     ...(TEAM_ID ? { teamId: TEAM_ID } : {}),
     environment: "production",
   });
-  const res = await fetch(
-    `https://vercel.com/api/web/insights/${path}?${query}`,
-    { headers: { Authorization: `Bearer ${TOKEN}` } }
-  );
-  if (!res.ok) return null;
+  const url = `https://vercel.com/api/web/insights/${path}?${query}`;
+  const res = await fetch(url, {
+    headers: { Authorization: `Bearer ${TOKEN}` },
+  });
+  if (!res.ok) {
+    const text = await res.text().catch(() => "");
+    console.error(`Vercel API error: ${res.status} ${path} - ${text}`);
+    return { error: res.status, message: text };
+  }
   return res.json();
 }
 
@@ -31,7 +35,12 @@ export default async function handler(
   }
 
   if (!TOKEN || !PROJECT_ID) {
-    return res.status(500).json({ error: "Missing Vercel API config" });
+    return res.status(500).json({
+      error: "Missing Vercel API config",
+      hasToken: !!TOKEN,
+      hasProjectId: !!PROJECT_ID,
+      hasTeamId: !!TEAM_ID,
+    });
   }
 
   const now = new Date();
@@ -39,10 +48,14 @@ export default async function handler(
   const from = thirtyDaysAgo.toISOString();
   const to = now.toISOString();
 
-  const [timeseries, overview] = await Promise.all([
-    fetchVercel("timeseries", { from, to }),
-    fetchVercel("overview", { from, to }),
-  ]);
+  try {
+    const [timeseries, overview] = await Promise.all([
+      fetchVercel("timeseries", { from, to }),
+      fetchVercel("overview", { from, to }),
+    ]);
 
-  res.status(200).json({ timeseries, overview });
+    res.status(200).json({ timeseries, overview });
+  } catch (err: any) {
+    res.status(500).json({ error: err.message || "Unknown error" });
+  }
 }
